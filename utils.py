@@ -1,7 +1,5 @@
-from graphviz import Digraph
 from random import randrange as r
 import os
-from glob import glob
 
 def read_quintuple_from_data(file):
     f = open(file, "r")

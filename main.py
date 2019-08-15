@@ -1,29 +1,48 @@
 from class_DFA import DFA
 from utils import *
 
-const = DFA(*read_quintuple_from_data("const"))
-soma = DFA(*read_quintuple_from_data("soma"))
-subtracao = DFA(*read_quintuple_from_data("subtracao"))
-multiplicacao = DFA(*read_quintuple_from_data("multiplicacao"))
-divisao = DFA(*read_quintuple_from_data("divisao"))
 
-data = [ i for i in input("Digite a expressão").split() ]
+def simplifica(pilha,op):
+    x = pilha.pop()
+    y = pilha.pop()
+    pilha.append((y,op,x))
+
+
+const = DFA(*read_quintuple_from_data('const'))
+soma = DFA(*read_quintuple_from_data('soma'))
+subtracao = DFA(*read_quintuple_from_data('subtracao'))
+multiplicacao = DFA(*read_quintuple_from_data('multiplicacao'))
+divisao = DFA(*read_quintuple_from_data('divisao'))
+
+data = [ i for i in input('Digite a expressão: ').split() ]
 
 exp = {}
 
-for word in data:
-    if const.run_with_word(word):
-        exp[word] = 'constante'
-    elif soma.run_with_word(word):
-        exp[word] = 'soma'
-    elif subtracao.run_with_word(word):
-        exp[word] = 'subtração'
-    elif multiplicacao.run_with_word(word):
-        exp[word] = 'multiplicação'
-    elif divisao.run_with_word(word):
-        exp[word] = 'divisão'
-    else:
-        exp[word] = 'não reconhecido'
+pilha = []
 
 for word in data:
-    print(word,':',exp[word])
+    if const.run_with_word(word):
+        pilha.append(word)
+        # if len(pilha) > 2:
+        #     print('não reconhecido')
+        #     exit()
+    elif soma.run_with_word(word):
+        if len(pilha) > 0:
+            simplifica(pilha,word)
+    elif subtracao.run_with_word(word):
+        if len(pilha) > 0:
+            simplifica(pilha,word)
+    elif multiplicacao.run_with_word(word):
+        if len(pilha) > 0:
+            simplifica(pilha,word)
+    elif divisao.run_with_word(word):
+        if len(pilha) > 0:
+            simplifica(pilha,word)
+    else:
+        print('não reconhecido')
+        exit()
+
+if len(pilha) == 1:
+    print(pilha)
+else:
+    print('expressão inválida')
