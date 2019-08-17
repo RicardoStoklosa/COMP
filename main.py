@@ -43,6 +43,6 @@ for word in data:
         exit()
 
 if len(pilha) == 1:
-    print(pilha)
+    print_pilha(pilha)
 else:
     print('expressão inválida')
