@@ -41,7 +41,6 @@ for word in data:
     else:
         print('não reconhecido')
         exit()
-
 if len(pilha) == 1:
     print_pilha(pilha)
 else:

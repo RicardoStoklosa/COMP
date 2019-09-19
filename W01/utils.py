@@ -19,4 +19,4 @@ def read_quintuple_from_data(file):
     return name, alphabet, states, delta_function, start_state, final_states
 
 def print_pilha(s):
-    print(str(s).replace('[','').replace(']','').replace(',','').replace("'",'')[1:-1])
+    print(str(s).replace(',','').replace("'",'')[2:-2])
