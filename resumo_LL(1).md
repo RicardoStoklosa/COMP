@@ -97,7 +97,13 @@ Pilha  |   Palavra |   Ação
 S$        (a&b)$     S->(A)
 (A)$      (a&b)$     Match, desempilha e avança
 A)$       a&b)$      A -> TE
-TE)$      a&b)$      T -> a
-aTE)$     a&b)$      Match, desempilha e avança
-TE)$      &b)$       T -> deu merda, vou reprovar
+TE)$      a&b)$      T -> a        <---------- vc errou aqui
+aE)$     a&b)$      Match, desempilha e avança
+E)$      &b)$       T -> deu merda, vou reprovar
+&TE)$    &b)$
+TE)$     b)$
+bE)$     b)$
+E)$      )$
+)$       )$
+$        $
 ```
